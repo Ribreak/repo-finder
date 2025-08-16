@@ -1,22 +1,24 @@
+import { useState } from 'react';
 import './App.css'
-import Repository from './components/Repository'
+import Search from './components/Search'
+import useDebounce from './hooks/useDebounce';
+import RepoList from './components/RepoList';
+
 
 function App() {
+    const [username, setUsername] = useState("");
+    const debouncedUsername = useDebounce(username, 500);
 
     return (
         <div className="container">
-            <header className="header">
+            <header>
                 <h1>GitHub Repository Finder</h1>
-                <div className="search-container">
-                    <input type="text" className="username-input" placeholder="Введите имя пользователя GitHub" />
-                    <button className="search-button">Поиск</button>
-                </div>
+                <Search username={username} setUsername={setUsername} />
+                <p>{debouncedUsername}</p>
             </header>
 
-            <main className="main-content">
-                <div className="repositories-grid">
-                    <Repository></Repository>
-                </div>
+            <main>
+                <RepoList username={debouncedUsername} />
             </main>
         </div>
     )

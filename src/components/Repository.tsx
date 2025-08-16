@@ -1,13 +1,20 @@
+interface RepositoryProps {
+    name: string
+    description: string | null
+    url: string
+    stars?: number | undefined
+    updateDate?: string | null | undefined
+}
 
-function Repository() {
+function Repository( { name, description, url, stars, updateDate }: RepositoryProps ) {
     return (
         <div className='repository-card'>
-            <h2></h2>
-            <p></p>
-            <a href="#" target="_blank">Перейти к репозиторию</a>
+            <h2>{name}</h2>
+            <p>{description}</p>
+            <a href={url} target="_blank">Перейти к репозиторию</a>
             <div className="repository-meta">
-                <div className="stars-count"></div>
-                <div>Обновлён: {new Date().toLocaleDateString()}</div>
+                <div className="stars-count">Звёзды: {stars}</div>
+                <div>Обновлён: {updateDate && new Date(updateDate).toLocaleDateString()}</div>
             </div>
         </div>
     )
