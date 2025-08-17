@@ -1,4 +1,5 @@
 interface RepositoryProps {
+    id: number
     name: string
     description: string | null
     url: string
@@ -6,10 +7,10 @@ interface RepositoryProps {
     updateDate?: string | null | undefined
 }
 
-function Repository( { name, description, url, stars, updateDate }: RepositoryProps ) {
+function Repository( { id, name, description, url, stars, updateDate }: RepositoryProps ) {
     return (
         <div className='repository-card'>
-            <h2>{name}</h2>
+            <h2>{id}. {name}</h2>
             <p>{description}</p>
             <a href={url} target="_blank">Перейти к репозиторию</a>
             <div className="repository-meta">
