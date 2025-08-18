@@ -39,48 +39,5 @@ header h1 {
     color: var(--primary-color);
 }
 
-.search-container {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-.username-input {
-    flex: 1;
-    padding: 10px 15px;
-    font-size: 16px;
-    border: 1px solid var(--border-color);
-    border-radius: 6px;
-    outline: none;
-}
-
-.username-input:focus {
-    border-color: var(--secondary-color);
-    box-shadow: 0 0 0 3px rgba(3, 102, 214, 0.3);
-}
-
-.search-button {
-    padding: 10px 20px;
-    background-color: var(--secondary-color);
-    color: white;
-    border: none;
-    border-radius: 6px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-
-.search-button:hover {
-    background-color: #0356b6;
-}
-
-.repositories-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 20px;
-    margin-bottom: 30px;
-}
 
 

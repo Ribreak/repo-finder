@@ -1,0 +1,21 @@
+.search {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.search__input-username {
+    flex: 1;
+    padding: 10px 15px;
+    font-size: 16px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    outline: none;
+}
+
+.username-input:focus {
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 3px rgba(3, 102, 214, 0.3);
+}

@@ -1,3 +1,5 @@
+import type { Ref } from "react"
+
 interface RepositoryProps {
     id: number
     name: string
@@ -5,11 +7,12 @@ interface RepositoryProps {
     url: string
     stars?: number | undefined
     updateDate?: string | null | undefined
+    ref?: Ref<HTMLDivElement>
 }
 
-function Repository( { id, name, description, url, stars, updateDate }: RepositoryProps ) {
+function Repository( { id, name, description, url, stars, updateDate, ref }: RepositoryProps ) {
     return (
-        <div className='repository-card'>
+        <div className='repository-card' ref={ref}>
             <h2>{id}. {name}</h2>
             <p>{description}</p>
             <a href={url} target="_blank">Перейти к репозиторию</a>

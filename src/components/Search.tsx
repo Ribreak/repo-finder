@@ -1,3 +1,4 @@
+import './Search.css'
 
 interface SearchProps {
     username: string
@@ -7,8 +8,8 @@ interface SearchProps {
 function Search({ username, onChange }: SearchProps) {
 
     return (
-        <div className="search-container">
-            <input type="text" className="username-input" placeholder="Введите имя пользователя GitHub" value={username} onChange={(e) => onChange(e.target.value)} />
+        <div className="search">
+            <input type="text" className="search__input-username" placeholder="Введите имя пользователя GitHub" value={username} onChange={(e) => onChange(e.target.value)} />
         </div>
     )
 }
