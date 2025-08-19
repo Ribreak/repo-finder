@@ -17,24 +17,46 @@ interface repo {
 
 function RepoList({ username, setIsLoading }: RepoListProps) {
     const [repos, setRepos] = useState<repo[]>([]);
+    const [currentLink, setCurrentLink] = useState('');
     const lastItem = useRef(null);
+
+    async function fetchData(url: string) {
+        setIsLoading(true);
+        const response = await getPaginatedData(url, 20);
+        setRepos([...repos, ...response.repos]);
+        setCurrentLink(response.link);
+        setIsLoading(false);
+    }
 
     useEffect(() => {
         setRepos([]);
+        setCurrentLink('');
         setIsLoading(false);
-
-        async function fetchData() {
-            const response = await getPaginatedData(`/users/${username}/repos`, 3);
-            setRepos(response.repos);
-            setIsLoading(false);
-        }
 
         if (username.length > 0) {
             setIsLoading(true);
-            fetchData();
+            fetchData(`/users/${username}/repos`);
         }
 
     }, [username]);
+
+    useEffect(() => {
+        const actionInSight = (entries: IntersectionObserverEntry[]) => {
+            if (entries[0].isIntersecting && currentLink.length > 0) {
+                fetchData(currentLink);
+            }
+        };
+
+        const observer = new IntersectionObserver(actionInSight);
+        if (lastItem.current) {
+            observer.observe(lastItem.current);
+        }
+
+        return () => {
+            if (lastItem.current) observer.unobserve(lastItem.current);
+        }
+
+    }, [currentLink, lastItem]);
 
     let id = 0;
 

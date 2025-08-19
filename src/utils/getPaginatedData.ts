@@ -21,20 +21,15 @@ export default async function getPaginatedData(url: string, perPage: number) {
             const matchResult = linkHeader.match(nextPattern);
             if (matchResult && matchResult[0]) {
                 url = matchResult[0];
-            } else {
-                pagesRemaining = false;
-                url = '';
             }
+        } else {
+            pagesRemaining = false;
+            url = '';
         }
     }
 
-    console.log({
-        repos: response.data,
-        link: url    
-    });
-
     return {
         repos: response.data,
-        link: url    
+        link: url
     };
 }
