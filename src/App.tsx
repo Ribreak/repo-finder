@@ -20,7 +20,7 @@ function App() {
 
             <main>
                 {isLoading && <Loader />}
-                <RepoList username={debouncedUsername} setIsLoading={setIsLoading} />
+                <RepoList username={debouncedUsername} isLoading={isLoading} setIsLoading={setIsLoading} />
             </main>
         </div>
     )

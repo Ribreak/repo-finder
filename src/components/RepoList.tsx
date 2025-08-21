@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from "react"
 import Repository from "./Repository";
 import getPaginatedData from "../utils/getPaginatedData";
+import './RepoList.css' 
 
 interface RepoListProps {
-    username: string
+    username: string,
+    isLoading: boolean
     setIsLoading: (isLoading: boolean) => void
 }
 
@@ -15,26 +17,31 @@ interface repo {
     updated_at?: string | null | undefined
 }
 
-function RepoList({ username, setIsLoading }: RepoListProps) {
+function RepoList({ username, isLoading, setIsLoading }: RepoListProps) {
     const [repos, setRepos] = useState<repo[]>([]);
     const [currentLink, setCurrentLink] = useState('');
+    const [error, setError] = useState('');
     const lastItem = useRef(null);
 
     async function fetchData(url: string) {
         setIsLoading(true);
-        const response = await getPaginatedData(url, 20);
-        setRepos([...repos, ...response.repos]);
-        setCurrentLink(response.link);
+        try {
+            const response = await getPaginatedData(url, 20);
+            setRepos([...repos, ...response.repos]);
+            setCurrentLink(response.link);
+        } catch (e) {
+            if (e instanceof Error) setError(e.message);
+        }
         setIsLoading(false);
     }
 
     useEffect(() => {
         setRepos([]);
         setCurrentLink('');
+        setError('');
         setIsLoading(false);
 
         if (username.length > 0) {
-            setIsLoading(true);
             fetchData(`/users/${username}/repos`);
         }
 
@@ -87,11 +94,10 @@ function RepoList({ username, setIsLoading }: RepoListProps) {
         />
     })
 
-    return (
-        <>
-            <div>{repositories}</div>
-        </>
-    )
+    if(error.length > 0) return <h3 className="error">{error}</h3>
+    else if (!isLoading && repositories.length < 1 && username.length > 1) 
+        return <h3>У пользователя <i>{username}</i> нет публичных репозиториев</h3>
+    else return <div>{repositories}</div>
 }
 
 export default RepoList

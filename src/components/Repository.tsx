@@ -1,4 +1,5 @@
 import type { Ref } from "react"
+import './Repository.css'
 
 interface RepositoryProps {
     id: number

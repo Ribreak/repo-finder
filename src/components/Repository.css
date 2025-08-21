@@ -1,9 +1,13 @@
 .repository-card {
-    background-color: var(--card-color);
-    border: 1px solid var(--border-color);
+    background-color: #fdfdfd;
+    border: 1px solid #e1e4e8;
     border-radius: 6px;
     padding: 20px;
     transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.repository-card:not(:last-child) {
+    margin-bottom: 15px;
 }
 
 .repository-card:hover {
@@ -14,7 +18,7 @@
 .repository-card h2 {
     font-size: 18px;
     margin-bottom: 10px;
-    color: var(--secondary-color);
+    color: #0366d6;
 }
 
 .repository-card p {
@@ -25,7 +29,7 @@
 .repository-card a {
     display: inline-block;
     margin-bottom: 15px;
-    color: var(--secondary-color);
+    color: #0366d6;
     text-decoration: none;
 }
 
