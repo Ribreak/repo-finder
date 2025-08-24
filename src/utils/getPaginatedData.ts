@@ -40,7 +40,7 @@ export default async function getPaginatedData(url: string, perPage: number) {
 
     } catch (error) {
         if (error instanceof RequestError && error.message.includes("Not Found")) {
-            throw new Error("Пользователь не найден"); 
+            throw new Error("Пользователь не найден");
         } else {
             throw new Error("Не удалось загрузить репозитории");
         }
